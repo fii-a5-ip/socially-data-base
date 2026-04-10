@@ -23,14 +23,48 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `socially`.`locations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `socially`.`locations` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `socially`.`outgoings`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `socially`.`outgoings` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) CHARACTER SET 'utf8mb4' NOT NULL,
   `url` VARCHAR(2048) CHARACTER SET 'utf8mb4' NULL,
-  PRIMARY KEY (`id`))
+  `location_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_outgoings_location_idx` (`location_id` ASC) VISIBLE,
+  CONSTRAINT `fk_outgoings_location`
+    FOREIGN KEY (`location_id`)
+    REFERENCES `socially`.`locations` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `socially`.`purchases`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `socially`.`purchases` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `amount` DOUBLE NULL DEFAULT 0,
+  `user` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_purchases_users`
+    FOREIGN KEY (`id`)
+    REFERENCES `socially`.`users` (`id`)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `socially`.`filters`
@@ -67,16 +101,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `socially`.`locations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socially`.`locations` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `socially`.`location_filters`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `socially`.`location_filters` (
@@ -94,29 +118,6 @@ CREATE TABLE IF NOT EXISTS `socially`.`location_filters` (
   CONSTRAINT `fk_loc_filt_filter`
     FOREIGN KEY (`filter_id`)
     REFERENCES `socially`.`filters` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `socially`.`outgoing_locations`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socially`.`outgoing_locations` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `outgoing_id` INT NOT NULL,
-  `location_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_out_loc_outgoing_idx` (`outgoing_id` ASC) VISIBLE,
-  INDEX `fk_out_loc_location_idx` (`location_id` ASC) VISIBLE,
-  CONSTRAINT `fk_out_loc_outgoing`
-    FOREIGN KEY (`outgoing_id`)
-    REFERENCES `socially`.`outgoings` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_out_loc_location`
-    FOREIGN KEY (`location_id`)
-    REFERENCES `socially`.`locations` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
