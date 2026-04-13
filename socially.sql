@@ -51,22 +51,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `socially`.`purchases`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socially`.`purchases` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `amount` DOUBLE NULL DEFAULT 0,
-  `user` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `fk_purchases_users`
-    FOREIGN KEY (`id`)
-    REFERENCES `socially`.`users` (`id`)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `socially`.`filters`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `socially`.`filters` (
