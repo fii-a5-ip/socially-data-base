@@ -33,16 +33,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `socially`.`outgoings`
+-- Table `socially`.`events`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `socially`.`outgoings` (
+CREATE TABLE IF NOT EXISTS `socially`.`events` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) CHARACTER SET 'utf8mb4' NOT NULL,
   `url` VARCHAR(2048) CHARACTER SET 'utf8mb4' NULL,
   `location_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_outgoings_location_idx` (`location_id` ASC) VISIBLE,
-  CONSTRAINT `fk_outgoings_location`
+  INDEX `fk_events_location_idx` (`location_id` ASC) VISIBLE,
+  CONSTRAINT `fk_events_location`
     FOREIGN KEY (`location_id`)
     REFERENCES `socially`.`locations` (`id`)
     ON DELETE CASCADE
@@ -100,6 +100,29 @@ CREATE TABLE IF NOT EXISTS `socially`.`location_filters` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_loc_filt_filter`
+    FOREIGN KEY (`filter_id`)
+    REFERENCES `socially`.`filters` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `socially`.`event_filters`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `socially`.`event_filters` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `event_id` INT NOT NULL,
+  `filter_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ev_filt_event_idx` (`event_id` ASC) VISIBLE,
+  INDEX `fk_ev_filt_filter_idx` (`filter_id` ASC) VISIBLE,
+  CONSTRAINT `fk_ev_filt_event`
+    FOREIGN KEY (`event_id`)
+    REFERENCES `socially`.`events` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_ev_filt_filter`
     FOREIGN KEY (`filter_id`)
     REFERENCES `socially`.`filters` (`id`)
     ON DELETE CASCADE
