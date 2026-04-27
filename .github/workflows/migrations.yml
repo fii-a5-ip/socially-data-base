@@ -1,0 +1,21 @@
+name: Deploy Database Migrations
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-migrations:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Tragem codul din repo
+        uses: actions/checkout@v3
+
+      - name: Rulăm Flyway direct spre TiDB
+        uses: flyway/flyway-github-action@v2
+        with:
+          url: ${{ secrets.TIDB_URL }}
+          command: migrate
+          locations: filesystem:migrations
