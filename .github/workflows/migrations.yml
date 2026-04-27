@@ -18,5 +18,6 @@ jobs:
           docker run --rm \
           -v ${{ github.workspace }}/migrations:/flyway/sql \
           flyway/flyway:latest \
+          -baselineOnMigrate="true" \
           -url="${{ secrets.TIDB_URL }}" \
           migrate
