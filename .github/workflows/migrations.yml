@@ -3,7 +3,7 @@ name: Deploy Database Migrations
 on:
   push:
     branches:
-      - main
+      - main 
 
 jobs:
   run-migrations:
@@ -11,11 +11,12 @@ jobs:
 
     steps:
       - name: Tragem codul din repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Rulăm Flyway direct spre TiDB
-        uses: flyway/flyway-github-action@v2
-        with:
-          url: ${{ secrets.TIDB_URL }}
-          command: migrate
-          locations: filesystem:migrations
+      - name: Rulam Flyway prin imagine Docker
+        run: |
+          docker run --rm \
+          -v ${{ github.workspace }}/migrations:/flyway/sql \
+          flyway/flyway:latest \
+          -url="${{ secrets.TIDB_URL }}" \
+          migrate
