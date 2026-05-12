@@ -1,0 +1,10 @@
+ALTER TABLE `socially`.`locations`
+ADD COLUMN `country` VARCHAR(100) NULL,
+ADD COLUMN `state_county` VARCHAR(100) NULL,
+ADD COLUMN `city` VARCHAR(100) NULL,
+ADD COLUMN `street` VARCHAR(100) NULL,
+ADD COLUMN `street_number` VARCHAR(20) NULL,
+ADD COLUMN `postalcode` VARCHAR(20) NULL,
+ADD COLUMN `formatted_address` VARCHAR(255) NULL,
+ADD COLUMN `contact` VARCHAR(100) NULL,
+ADD COLUMN `phone_number` VARCHAR(30) NULL;
