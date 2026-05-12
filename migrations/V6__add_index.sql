@@ -1,0 +1,1 @@
+CREATE INDEX idx_location_coords ON locations(latitude, longitude);
