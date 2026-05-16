@@ -1,1 +1,1 @@
-ALTER TABLE `socially`.`events` ADD FULLTEXT INDEX `idx_events_desc` (`desc`);
+ALTER TABLE `socially`.`events` ADD FULLTEXT INDEX `idx_events_desc` (`desc`) ADD_COLUMNAR_REPLICA_ON_DEMAND;
