@@ -1,1 +1,1 @@
-ALTER TABLE events ADD FULLTEXT(desc);
+ALTER TABLE `socially`.`events` ADD FULLTEXT INDEX `idx_events_desc` (`desc`);
