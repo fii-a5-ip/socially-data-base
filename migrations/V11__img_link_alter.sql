@@ -1,1 +1,1 @@
-ALTER TABLE groups MODIFY COLUMN img_link LONGTEXT NULL;
+ALTER TABLE `socially`.`groups` MODIFY COLUMN `img_link` LONGTEXT NULL;
