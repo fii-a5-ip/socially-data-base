@@ -1,1 +1,0 @@
-ALTER TABLE `socially`.`events` MODIFY COLUMN `url` LONGTEXT NULL;
