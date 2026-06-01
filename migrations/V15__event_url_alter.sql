@@ -1,0 +1,1 @@
+ALTER TABLE `socially`.`events` MODIFY COLUMN `url` LONGTEXT CHARACTER SET utf8mb4 NULL;
