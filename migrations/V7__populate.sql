@@ -102,3 +102,4 @@ INSERT INTO `socially`.`event_filters` (`event_id`, `filter_id`) VALUES
 (18, (SELECT id FROM `socially`.`filters` WHERE name = 'indoors')),
 (19, (SELECT id FROM `socially`.`filters` WHERE name = 'cafe')),
 (19, (SELECT id FROM `socially`.`filters` WHERE name = 'board games'));
+
