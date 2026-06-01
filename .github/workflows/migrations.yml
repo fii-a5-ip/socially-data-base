@@ -20,4 +20,4 @@ jobs:
           flyway/flyway:latest \
           -baselineOnMigrate="true" \
           -url="${{ secrets.TIDB_URL }}" \
-          migrate
+          clean migrate
