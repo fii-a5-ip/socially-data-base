@@ -19,6 +19,5 @@ jobs:
           -v ${{ github.workspace }}/migrations:/flyway/sql \
           flyway/flyway:latest \
           -baselineOnMigrate="true" \
-          -cleanDisabled="false" \
           -url="${{ secrets.TIDB_URL }}" \
-          clean migrate
+          migrate
